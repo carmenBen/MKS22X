@@ -1,8 +1,10 @@
 public class QueenBoard{
   private int[][] board;
+  private int solutions;
 
   public QueenBoard(int size){
     board = new int[size][size];
+    solutions = 0;
     for(int r = 0;r < size;r++){
 	    for(int c = 0;c < size;c++){
         board[r][c] = 0;
@@ -141,8 +143,22 @@ public class QueenBoard{
         }
 	    }
     }
-    return 0;
+    countSolutionsHelp(0);
+    return solutions;
   }
-  
+
+  public boolean countSolutionsHelp(int col){
+    if(col >= board[0].length){
+      solutions++;
+      return true;
+    }
+    for(int r = 0;r < board.length;r++){
+      if(addQueen(r,col)){
+        countSolutionsHelp(col + 1);
+        removeQueen(r,col);
+      }
+    }
+    return false;
+  }
 
 }
