@@ -11,34 +11,56 @@ public class QueenBoard{
   }
 
     
-  public boolean addQueen(int r, int c){
+  private boolean addQueen(int r, int c){
     if(board[r][c] == 0){
-	    board[r][c] = -1;
-	    for(int i = c+1; i < board[0].length; i++){
+	    for(int i = 0;i < board[0].length; i++){
         board[r][i] +=1;
-        board[r + i][i] +=1;
 	    }
-	    for(int i = r+1; i < board[0].length; i++){
+      for(int i = 1;i+c < board[0].length && i+r < board.length;i++){
+        board[r+i][c+i] +=1;
+      }
+      for(int i = 1;c>=i&&r>=i;i++){
+        board[r-i][c-i] +=1;
+      }
+      for(int i = 1;i+c < board[0].length && r>=i;i++){
+        board[r-i][c+i] +=1;
+      }
+      for(int i = 1;c>=i&&r+i < board.length;i++){
+        board[r+i][c-i] +=1;
+      }
+	    for(int i = 0; i < board[0].length; i++){
         board[i][c] +=1;
 	    }
+	    board[r][c] = -1;
 	    return true;
     }
     return false;
   }
 	
-  public boolean removeQueen(int r, int c){
+  private boolean removeQueen(int r, int c){
     if(board[r][c] != -1){
 	    return false;
     }
     else{
-	    board[r][c] = 0;
-	    for(int i = c; i < board[0].length; i++){
+	    for(int i = 0;i < board[0].length; i++){
         board[r][i] -=1;
-        board[r + i][i] -=1;
 	    }
-	    for(int i = r; i < board[0].length; i++){
+      for(int i = 1;i+c < board[0].length && i+r < board.length;i++){
+        board[r+i][c+i] -=1;
+      }
+      for(int i = 1;c>=i&&r>=i;i++){
+        board[r-i][c-i] -=1;
+      }
+      for(int i = 1;i+c < board[0].length && r>=i;i++){
+        board[r-i][c+i] -=1;
+      }
+      for(int i = 1;c>=i&&r+i < board.length;i++){
+        board[r+i][c-i] -=1;
+      }
+	    for(int i = 0; i < board[0].length; i++){
         board[i][c] -=1;
 	    }
+      board[r][c] = 0;
 	    return true;
     }
   }
@@ -59,6 +81,9 @@ public class QueenBoard{
         if(board[r][c] == -1){
           total += "Q ";
         }
+        /*        else if(board[r][c] != 0){
+          total += "a ";
+          }*/
         else{
           total += "_ ";
         }
@@ -85,11 +110,24 @@ public class QueenBoard{
           throw new IllegalStateException();
         }
 	    }
-    }	
-    return true;
+    }
+    return solveHelp(0);
   }
 
-  //  public boolean solveHelp(int col
+  public boolean solveHelp(int col){
+    if(col >= board[0].length){
+      return true;
+    }
+    for(int r = 0;r < board.length;r++){
+      if(addQueen(r,col)){
+        if(solveHelp(col + 1)){
+          return true;
+        }
+        removeQueen(r,col);
+      }
+    }
+    return false;
+  }
   
   /**
    *@return the number of solutions found, and leaves the board filled with only 0's
