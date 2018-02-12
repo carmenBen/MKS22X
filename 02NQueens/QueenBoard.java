@@ -127,6 +127,24 @@ public class QueenBoard{
 	}
 	return false;
     }
+
+    public boolean solveHelpVisual(int col){
+	if(col >= board[0].length){
+	    return true;
+	}
+	for(int r = 0;r < board.length;r++){
+	    if(addQueen(r,col)){
+		System.out.println(Text.go(1,1));
+		System.out.println(this);
+		Text.wait(1000);
+		if(solveHelp(col + 1)){
+		    return true;
+		}
+		removeQueen(r,col);
+	    }
+	}
+	return false;
+    }
   
     /**
      *@return the number of solutions found, and leaves the board filled with only 0's
