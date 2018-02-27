@@ -12,14 +12,20 @@ public class Recursion{
   }
 
   //1.1b Fibonacci
-  public int fib(int n){
+  public static int fib(int n){
     if(n < 0){
 	    throw new IllegalArgumentException();
     }
-    return fibHelp(0,1,n);
+    if(n == 0){
+	return 0;
+    }
+    if(n <= 2){
+	return 1;
+    }
+    return fibHelp(0,1,n - 1);
   }
 
-  private int fibHelp(int low, int total, int n){
+  private static int fibHelp(int low, int total, int n){
     if(n == 0){
       return total;
     }
