@@ -22,29 +22,42 @@ public class Maze{
 
     */
 
-    public Maze(String filename){
+    public Maze(String filename) throws FileNotFoundException{
 	animate = false;
-        //COMPLETE CONSTRUCTOR
-
+        //COMPLETE CONSTRUCTOR	
 	ArrayList<String> lines = new ArrayList<String> ();
 	File info = new File(filename);
 	Scanner inf = new Scanner(info);
 	while(inf.hasNextLine()){
 	    lines.add(inf.nextLine());
 	}
+	
 	maze = new char[lines.size()][lines.get(0).length()];
+	int e = 0;
+	int s = 0;
 	for(int r = 0;r<lines.size();r++){
 	    for(int c= 0;c<lines.get(0).length();c++){
-		maze[r][c] = lines.get(r).charAt(c);
+		char current = lines.get(r).charAt(c);
+		if(current == 'E'){
+		    e++;
+		}
+		else if(current == 'S'){
+		    s++;
+		}
+		maze[r][c] = current;
 	    }
 	}
+	if(e != 1 || s != 1){
+		    throw new IllegalStateException();
+	}
+	
     }
 
     public String toString(){
 	String test = "";
 	for(int r = 0;r<maze.length;r++){
 	    for(int c= 0;c<maze[0].length;c++){
-		text+= maze[r][c];
+		test+= maze[r][c];
 	    }
 	}
 	return test;
@@ -93,7 +106,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
-
+	return 0;
     }
 
     /*
