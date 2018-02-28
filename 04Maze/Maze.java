@@ -5,6 +5,8 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;//false by default
+    private int count;
+    private int[] possibleMoves;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -24,6 +26,7 @@ public class Maze{
 
     public Maze(String filename) throws FileNotFoundException{
 	animate = false;
+	count = 0;
         //COMPLETE CONSTRUCTOR	
 	ArrayList<String> lines = new ArrayList<String> ();
 	File info = new File(filename);
@@ -48,9 +51,13 @@ public class Maze{
 	    }
 	}
 	if(e != 1 || s != 1){
-		    throw new IllegalStateException();
+	    throw new IllegalStateException();
 	}
-	
+
+	possibleMoves = new int[]{1,0,
+				  0,-1,
+				  -1,0,
+				  0,1};
     }
 
     public String toString(){
@@ -59,17 +66,18 @@ public class Maze{
 	    for(int c= 0;c<maze[0].length;c++){
 		test+= maze[r][c];
 	    }
+	    test += "\n";
 	}
 	return test;
     }
 
     private void wait(int millis){
-         try {
-             Thread.sleep(millis);
-         }
-         catch (InterruptedException e) {
-         }
-     }
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
 
 
     public void setAnimate(boolean b){
@@ -96,17 +104,24 @@ public class Maze{
 
     */
     public int solve(){
+	int sCol = 0;
+	int sRow = 0;
+	//find the location of the S. 
+	for(int r = 0;r<maze.length;r++){
+	    for(int c= 0;c<maze[0].length;c++){
+		if(maze[r][c] == 'S'){
+		    sCol = c;
+		    sRow = r;
+		}
+	    }
+	}
 
-            //find the location of the S. 
-
-
-            //erase the S
-
-
-            //and start solving at the location of the s.
-
-            //return solve(???,???);
-	return 0;
+	//erase the S
+	//and start solving at the location of the s.
+	maze[sRow][sCol] = ' ';
+	
+	//return solve(???,???);
+	return solve(sRow,sCol,-1,-1);
     }
 
     /*
@@ -120,14 +135,14 @@ public class Maze{
 
       Postcondition:
 
-        The S is replaced with '@' but the 'E' is not.
+      The S is replaced with '@' but the 'E' is not.
 
-        All visited spots that were not part of the solution are changed to '.'
+      All visited spots that were not part of the solution are changed to '.'
 
-            Note: This is not required based on the algorithm, it is just nice visually to see.
-        All visited spots that are part of the solution are changed to '@'
+      Note: This is not required based on the algorithm, it is just nice visually to see.
+      All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
+    private int solve(int row, int col, int pRow, int pCol){ //you can add more parameters since this is private
 
 
         //automatic animation! You are welcome.
@@ -140,6 +155,21 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
+	if(maze[row][col] == 'E'){
+	    return count;
+	}
+	else if(maze[row][col] == ' '){
+	    maze[row][col] = '@';
+	    for(int i = 0;i+1 < possibleMoves.length;i= i+2){
+		solve(row + possibleMoves[i], col + possibleMoves[i+1],row,col);
+	    }
+	}
+	else{
+	    //go back
+	    maze[row][col] = '.';
+	    maze[pRow][pCol] = ' ';
+	    solve(pRow,pCol,row,col);
+	}
 
         return -1; //so it compiles
     }
