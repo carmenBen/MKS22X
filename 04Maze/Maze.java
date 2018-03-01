@@ -121,7 +121,7 @@ public class Maze{
 	maze[sRow][sCol] = ' ';
 	
 	//return solve(???,???);
-	return solve(sRow,sCol,-1,-1);
+	return solve(sRow,sCol,false,-1,-1);
     }
 
     /*
@@ -142,9 +142,7 @@ public class Maze{
       Note: This is not required based on the algorithm, it is just nice visually to see.
       All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col, int pRow, int pCol){ //you can add more parameters since this is private
-
-
+    private int solve(int row, int col,boolean backingUp,int pRow, int pCol){ //you can add more parameters since this is private
         //automatic animation! You are welcome.
         if(animate){
 
@@ -160,18 +158,24 @@ public class Maze{
 	}
 	else if(maze[row][col] == ' '){
 	    maze[row][col] = '@';
-	    for(int i = 0;i+1 < possibleMoves.length;i= i+2){
-		solve(row + possibleMoves[i], col + possibleMoves[i+1],row,col);
+	    count++;
+	}
+	for(int i = 0;i+1 < possibleMoves.length;i= i+2){
+	    if(maze[row + possibleMoves[i]][col + possibleMoves[i+1]] == ' ' || maze[row + possibleMoves[i]][col + possibleMoves[i+1]] == 'E'){
+		return solve(row + possibleMoves[i], col + possibleMoves[i+1],false,i,i+1);
 	    }
 	}
-	else{
-	    //go back
-	    maze[row][col] = '.';
-	    maze[pRow][pCol] = ' ';
-	    solve(pRow,pCol,row,col);
+	count --;
+	maze[row][col] = '.';
+	if(!backingUp){
+	    return solve(row + (-1* possibleMoves[pRow]), col + (-1* possibleMoves[pCol]),true,pRow,pCol);	
 	}
-
-        return -1; //so it compiles
+	for(int i = 0;i+1 < possibleMoves.length;i= i+2){
+	    if(maze[row + possibleMoves[i]][col + possibleMoves[i+1]] == '@'){
+		return solve(row + possibleMoves[i], col + possibleMoves[i+1],true,i,i+1);
+	    }
+	}
+	return -1; //so it compiles
     }
 
 
