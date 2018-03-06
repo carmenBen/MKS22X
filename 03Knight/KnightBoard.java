@@ -64,7 +64,7 @@ public class KnightBoard{
 	if(row < 0 || row >= board.length || col < 0 || col >= board[0].length){
 	    throw new IllegalArgumentException();
 	}
-	return solveH(row,col,0);
+	return solveH(row,col,1);
     }
     
     public int countSolutions(int row, int col) {
@@ -78,7 +78,7 @@ public class KnightBoard{
 	if(row < 0 || row >= board.length || col < 0 || col >= board[0].length){
 	    throw new IllegalArgumentException();
 	}
-	countSolutionsH(row,col,0);
+	countSolutionsH(row,col,1);
 	return counter;
     }
 
@@ -102,14 +102,15 @@ public class KnightBoard{
     // level is the # of the knight
 
     private boolean countSolutionsH(int row ,int col, int level) {
-	if(level > board.length * board[0].length){
-	    counter++;
-	    return true;
-	}
 	for(int i = 0; i+1 < possibleMoves.length;i= i+2){
 	    if(row+possibleMoves[i]>=0 && row+possibleMoves[i] < board.length && col+possibleMoves[i+1] >= 0 && col+possibleMoves[i+1] < board[0].length){
 		if(board[row][col] == 0){
 		    board[row][col] = level;
+		    if(level ==  board.length * board[0].length){
+			counter++;
+			board[row][col] = 0;
+			return true;
+		    }
 		    countSolutionsH(row+possibleMoves[i],col+possibleMoves[i+1],level+1);
 		    board[row][col] = 0;
 		}
