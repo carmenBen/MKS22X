@@ -7,6 +7,7 @@ public class USACO{
 	int[][] data;
 	ArrayList<String> lines = new ArrayList<String> ();
 	int[] rcen = new int[4];
+	data = new int[0][0];
 	try{
 	    File info = new File(filename);
 	    Scanner inf = new Scanner(info);
@@ -29,36 +30,56 @@ public class USACO{
 	    System.out.println("File not found: " + filename);
 	    System.exit(1);
 	}
-
+	
+        
+	
 	//follow instructions in file
 	for(int i = 0;i < lines.size();i++){
 	    String[] current = new String[3];
 	    current = lines.get(i).split(" ");
 	    int highest = 0;
-	    for(int r = current[0];r < current[0] + 3;r++){
-		for(int c = current[1];c< current[1] + 3;c++){
+	    for(int r = Integer.parseInt(current[0])-1;r < Integer.parseInt(current[0])+ 2;r++){
+		for(int c = Integer.parseInt(current[1])-1;c< Integer.parseInt(current[1])+2;c++){
 		    if(data[r][c] > highest){
 			highest = data[r][c];
 		    }
 		}
 	    }
-	    while(current[2] > -1){
-		for(int r = current[0];r < current[0] + 3;r++){
-		    for(int c = current[1];c< current[1] + 3;c++){
-			if(
-			   }
+	    while(Integer.parseInt(current[2]) > 0 ){
+		for(int r = Integer.parseInt(current[0])-1;r < Integer.parseInt(current[0])+2;r++){
+		    for(int c = Integer.parseInt(current[1])-1;c< Integer.parseInt(current[1])+2;c++){
+			if(data[r][c] == highest){
+			    data[r][c]--;
+			}
 		    }
 		}
+		highest--;
+		current[2] = (Integer.parseInt(current[2]) - 1) +"";
 	    }
-	    //change depth
-
-		    //calculate volume and return
+	    
+	}
+	//change depth
+	for(int r = 0;r< rcen[0];r++){
+	    for(int c = 0;c< rcen[1];c++){
+		data[r][c] -= rcen[2];
+	    }
+	}
+        
 	
-	return 0;
+	//calculate volume and return
+	int depth = 0;
+	for(int r = 0;r < rcen[0];r++){
+	    for(int c = 0;c< rcen[1];c++){
+		if(data[r][c] < 0){
+		    depth+= -1*data[r][c];
+		}
+	    }
+	}
+	return depth*72*72;
     }
     //public static int silver(String filename);
 
     public static void main(String[] args){
-        bronze("text.txt");
+	System.out.println(bronze("text.txt"));
     }
 }
