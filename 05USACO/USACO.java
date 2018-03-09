@@ -77,9 +77,83 @@ public class USACO{
 	}
 	return depth*72*72;
     }
-    //public static int silver(String filename);
+
+
+    public static int silver(String filename){
+	//read file in
+        char[][] data;
+	int stepsTaken = 0;
+	int[] abcd = new int[4];
+	int[] rcd = new int[3];
+	data = new char[0][0];
+	try{
+	    File info = new File(filename);
+	    Scanner inf = new Scanner(info);
+	    for(int i = 0;i < 3;i++){
+		rcd[i] = inf.nextInt();
+	    }
+	    data = new char[rcd[0]][rcd[1]];
+	    String[] current = new String[rcd[1]];
+	    inf.nextLine();
+	    for(int r = 0;r < rcd[0];r++){
+		current = inf.nextLine().split("");
+		for(int c = 0;c < rcd[1];c++){
+		    data[r][c] = current[c].charAt(0);
+		}
+	    }
+	    for(int i = 0;i < 4;i++){
+		abcd[i] = inf.nextInt() - 1;
+	    }
+	    int[][] b1 = new int[rcd[0]][rcd[1]];
+	    int[][] b2 = new int[rcd[0]][rcd[1]];
+	    for(int r = 0;r < rcd[0];r++){
+		for(int c = 0;c < rcd[1];c++){
+		    b1[r][c] = 0;
+		    b2[r][c] = 0;
+		}
+	    }
+	    int answer = 0;
+	    for(int i = 0; i < rcd[2];i++){
+		for(int r = 0;r < rcd[0];r++){
+		    for(int c = 0;c < rcd[1];c++){
+			//check if theres a tree there
+			if(data[r][c] != '*' && i % 2 == 0){
+			    //if it was possible before then not anymore
+			    if(b1[r][c] != 0){
+				b2[r][c] = 0;
+			    }
+			    else{
+				int updatedNum = 0;
+				if(r + 1 < rcd[0]){
+				    updatedNum += 
+			    }
+			}
+			else if(data[r][c] != '*'){
+
+			}
+		    }
+		}
+	    }
+	    
+	    return answer;
+	}catch(FileNotFoundException e){
+	    System.out.println("File not found: " + filename);
+	    System.exit(1);
+	}
+	/*String test = "";
+	for(int r = 0;r<data.length;r++){
+	    for(int c= 0;c<data[0].length;c++){
+		test+= data[r][c];
+	    }
+	    test += "\n";
+	}
+	System.out.println(test);*/
+	return 0;
+	
+    }
 
     public static void main(String[] args){
-	System.out.println(bronze("text.txt"));
+	//System.out.println(bronze("text.txt"));
+	silver("text.txt");
     }
 }
