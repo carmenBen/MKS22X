@@ -51,13 +51,26 @@ public class Quick{
 	return -1;
     }
 
-    public static void quickSort(int[] ary){
-	int[] data = new int[ary.length];
+    public static void quickSort(int[] data){
+	/*int[] data = new int[ary.length];
 	for(int i = 0;i < ary.length;i++){
 	    data[i] = quickSelect(ary, i);
 	}
 	for(int i = 0;i < ary.length;i++){
 	    ary[i] = data[i];
+	}*/
+	int start = 0;
+	int end = data.length - 1;
+	int i  = partition(data,start,end);
+	for(int j = 0; j < data.length;j++){
+	    if(i < data.length/2){
+		start = i + 1;
+		i = partition(data,start,end);
+	    }
+	    else if(i > data.length/ 2){
+		end = i -1;
+		i = partition(data,start,end);
+	    }
 	}
     }
 
