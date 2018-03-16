@@ -126,7 +126,7 @@ public class Quick{
 	}
     }
 
-    public static void main(String[] args){
+    /*    public static void main(String[] args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
 	System.out.println(newQuickSelect( ary , 0 ));// would return 0
 	System.out.println(newQuickSelect( ary , 1 ));//  would return 2
@@ -134,8 +134,8 @@ public class Quick{
 	System.out.println(newQuickSelect( ary , 3 ));//  would return 10
 	System.out.println(newQuickSelect( ary , 4 ));//  would return 15
 	System.out.println(newQuickSelect( ary , 5 ));//  would return 23
-	//	quickSort(ary);
-	//        newQuickSort(ary);
-	//	System.out.println(java.util.Arrays.toString(ary));
+	quickSort(ary);
+	newQuickSort(ary);
+	System.out.println(java.util.Arrays.toString(ary));*/
     }
 }
