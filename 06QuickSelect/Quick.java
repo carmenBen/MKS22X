@@ -87,16 +87,16 @@ public class Quick{
 	int end = data.length - 1;
 	int[] info  = DFPartition(data,start,end);
 	for(int j = 0; j < data.length;j++){
-	    if(i == k){
+	    if(info[0] == k){
 		return data[k];
 	    }
-	    else if(i < k){
-		start = i + 1;
-		i = partition(data,start,end);
+	    else if(info[0] < k){
+		start = info[0] + 1;
+		info = DFPartition(data,start,end);
 	    }
 	    else{
-		end = i -1;
-		i = partition(data,start,end);
+		end = info[0] -1;
+		info = DFPartition(data,start,end);
 	    }
 	}
 	return -1;
@@ -128,14 +128,14 @@ public class Quick{
 
     public static void main(String[] args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
-	/*	System.out.println(quickSelect( ary , 0 ));// would return 0
-	System.out.println(quickSelect( ary , 1 ));//  would return 2
-	System.out.println(quickSelect( ary , 2 ));//  would return 5
-	System.out.println(quickSelect( ary , 3 ));//  would return 10
-	System.out.println(quickSelect( ary , 4 ));//  would return 15
-	System.out.println(quickSelect( ary , 5 ));//  would return 23
-	quickSort(ary);*/
-        newQuickSort(ary);
-	System.out.println(java.util.Arrays.toString(ary));
+	System.out.println(newQuickSelect( ary , 0 ));// would return 0
+	System.out.println(newQuickSelect( ary , 1 ));//  would return 2
+	System.out.println(newQuickSelect( ary , 2 ));//  would return 5
+	System.out.println(newQuickSelect( ary , 3 ));//  would return 10
+	System.out.println(newQuickSelect( ary , 4 ));//  would return 15
+	System.out.println(newQuickSelect( ary , 5 ));//  would return 23
+	//	quickSort(ary);
+	//        newQuickSort(ary);
+	//	System.out.println(java.util.Arrays.toString(ary));
     }
 }
