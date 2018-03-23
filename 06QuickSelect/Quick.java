@@ -102,11 +102,11 @@ public class Quick{
 	return -1;
     }
 
-    public static void quickSort(int[] data){
-	quickSortHelp(data,0,data.length -1);
+    public static void oldQuickSort(int[] data){
+	oldQuickSortHelp(data,0,data.length -1);
     }
 
-    private static void quickSortHelp(int[] data, int start, int end){
+    private static void oldQuickSortHelp(int[] data, int start, int end){
 	if(end - start + 1 > 1){
 	    int index = partition(data, start, end);
 	    quickSortHelp(data,start,index);
@@ -114,28 +114,28 @@ public class Quick{
 	}
     }
 
-    public static void newQuickSort(int[] data){
+    public static void quickSort(int[] data){
 	quickSortHelp(data,0,data.length -1);
     }
 
-    private static void newQuickSortHelp(int[] data, int start, int end){
+    private static void quickSortHelp(int[] data, int start, int end){
 	if(end - start + 1 > 1){
 	    int[]  info = DFPartition(data, start, end);
-	    quickSortHelp(data,start,info[0]);
+	    quickSortHelp(data,start,info[0]-1);
 	    quickSortHelp(data,info[1],end);
 	}
     }
 
-    /*    public static void main(String[] args){
+    public static void main(String[] args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
-	System.out.println(newQuickSelect( ary , 0 ));// would return 0
+	/*	System.out.println(newQuickSelect( ary , 0 ));// would return 0
 	System.out.println(newQuickSelect( ary , 1 ));//  would return 2
 	System.out.println(newQuickSelect( ary , 2 ));//  would return 5
 	System.out.println(newQuickSelect( ary , 3 ));//  would return 10
 	System.out.println(newQuickSelect( ary , 4 ));//  would return 15
 	System.out.println(newQuickSelect( ary , 5 ));//  would return 23
+	quickSort(ary);*/
 	quickSort(ary);
-	newQuickSort(ary);
-	System.out.println(java.util.Arrays.toString(ary));*/
+	System.out.println(java.util.Arrays.toString(ary));
     }
 }
