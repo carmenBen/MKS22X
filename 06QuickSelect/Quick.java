@@ -126,6 +126,19 @@ public class Quick{
 	}
     }
 
+    
+    public static void newInsertionsort(int[] data, int lo, int hi){
+	for(int i = lo+1;i <= hi;i++){
+	    int pivot = data[i];
+	    int j = i-1;
+	    while(j >= lo && data[j] > pivot){
+		data[j+1] = data[j];
+		j--;
+	    }
+	    data[j+1] = pivot;
+	}
+    }
+
     public static void main(String[] args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
 	/*	System.out.println(newQuickSelect( ary , 0 ));// would return 0
