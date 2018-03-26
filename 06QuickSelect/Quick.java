@@ -62,7 +62,7 @@ public class Quick{
     return ans;
   }
 
-  public static int quickSelect(int[] data, int k){
+  public static int quickselect(int[] data, int k){
     int start = 0;
     int end = data.length - 1;
     int i  = partition(data,start,end);
