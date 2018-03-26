@@ -114,7 +114,7 @@ public class Quick{
     }
   }
 
-  public static void quickSort(int[] data){
+  public static void quicksort(int[] data){
     quickSortHelp(data,0,data.length -1);
   }
 
@@ -151,7 +151,7 @@ public class Quick{
         System.out.println(newQuickSelect( ary , 4 ));//  would return 15
         System.out.println(newQuickSelect( ary , 5 ));//  would return 23
         quickSort(ary);*/
-    quickSort(ary);
+    quicksort(ary);
     System.out.println(java.util.Arrays.toString(ary));
   }
 }
