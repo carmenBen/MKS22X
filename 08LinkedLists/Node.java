@@ -1,9 +1,9 @@
 public class Node{
     private Node next = null;
     private Node prev = null;
-    private int data;
+    private Integer data;
 
-    public Node(int val, Node nextNode, Node prevNode){
+    public Node(Integer val, Node nextNode, Node prevNode){
 	next = nextNode;
 	prev = prevNode;
 	data = val;
@@ -18,7 +18,7 @@ public class Node{
 	return prev;
     }
 
-    public int getValue(){
+    public Integer getValue(){
 	return data;
     }
 

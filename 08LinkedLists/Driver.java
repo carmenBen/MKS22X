@@ -4,6 +4,13 @@ public class Driver{
 	System.out.println(test);
 	test.add(3);
 	test.add(5);
+	test.add(5);
 	System.out.println(test);
+        test.remove(5);
+	System.out.println(test);
+	/*	System.out.println(test.get(1));
+	System.out.println(test.set(1,10));
+	System.out.println(test.get(1));
+	System.out.println(test.size());*/
     }
 }
