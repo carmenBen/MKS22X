@@ -6,7 +6,8 @@ public class Driver{
 	test.add(5);
 	test.add(5);
 	System.out.println(test);
-        test.remove(5);
+	Integer n = new Integer(5);
+        test.remove(n);
 	System.out.println(test);
 	/*	System.out.println(test.get(1));
 	System.out.println(test.set(1,10));
