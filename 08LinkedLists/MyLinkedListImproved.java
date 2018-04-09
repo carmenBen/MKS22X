@@ -1,16 +1,16 @@
-public class MyLinkedList{
-  Node first;
-  Node last;
+public class MyLinkedListImproved<T>{
+  Node<T> first;
+  Node<T> last;
   int length;
 
-  public MyLinkedList(){
+  public MyLinkedListImproved(){
     length = 0;
     first = null;
     last = null;
   }
 
-  public boolean add(Integer value){
-    Node val = new Node(value,null,null);
+  public boolean add(T value){
+    Node<T> val = new Node(value,null,null);
     if(length != 0){
 	    last.setNext(val);
 	    val.setPrev(last);
@@ -30,7 +30,7 @@ public class MyLinkedList{
   public String toString(){
     if(length > 1 ){
 	    String total = "["+first.getValue() + ",";
-	    Node current = first.getNext();
+	    Node<T> current = first.getNext();
 	    for(int i = 1;i < length-1;i++){
         total += current.getValue() + ",";
         current = current.getNext();
@@ -45,16 +45,16 @@ public class MyLinkedList{
     }
   }
 
-  public Integer get(int index){
+  public T get(int index){
     if(index >= length || index < 0){
       throw new IndexOutOfBoundsException();      
     }
     return getNode(index).getValue();
   }
 
-  private Node getNode(int n){
+  private Node<T> getNode(int n){
     int i = 0;
-    Node current = first;
+    Node<T> current = first;
     while(i <= n && current != null){
 	    if(i==n){
         return current;
@@ -65,22 +65,22 @@ public class MyLinkedList{
     return null;
   }
 
-  public Integer set(int index,Integer newValue){
+  public T set(int index,T newValue){
     if(index >= length || index < 0){
       throw new IndexOutOfBoundsException();      
     }
-    Node current = 	getNode(index);
-    Integer old = current.getValue();
+    Node<T> current = getNode(index);
+    T old = current.getValue();
     current.setValue(newValue);
     return old;
   }
 
-  public int indexOf(Integer value){
-    Node node = first;
+  public int indexOf(T value){
+    Node<T> node = first;
     int count = 0;
     while(node != null){
 	    if(node.getValue().equals(value)){
-        return count;
+		return count;
 	    }
 	    count++;
 	    node = node.getNext();
@@ -88,28 +88,28 @@ public class MyLinkedList{
     return -1;
   }
 
-    public void add(int index, Integer value){//exceptions!
+    public void add(int index, T value){//exceptions!
 	if(index > length || index < 0){
 	    throw new IndexOutOfBoundsException();      
 	}
         if(length == 0){
-	    Node node = new Node(value,null,null);
+	    Node<T> node = new Node(value,null,null);
 	    first = node;
 	    last = node;
 	}
 	else if(index != 0 && index != length){
-	    Node current = getNode(index);
-	    Node node = new Node(value,current,current.getPrev());
+	    Node<T> current = getNode(index);
+	    Node<T> node = new Node(value,current,current.getPrev());
 	    current.getPrev().setNext(node);
 	    current.setPrev(node);
 	}
 	else if(index == length){
-	    Node node = new Node(value,null,last);
+	    Node<T> node = new Node(value,null,last);
 	    last.setNext(node);
 	    last = node;
 	}
 	else{
-	    Node node = new Node(value,first,null);
+	    Node<T> node = new Node(value,first,null);
 	    first.setPrev(node);
 	    first = node;
 	}
@@ -117,10 +117,10 @@ public class MyLinkedList{
   }
  	
 
-  public boolean remove(Integer value){
+  public boolean remove(T value){
     int index = indexOf(value);
     if(index != 0 && index != length -1){
-	    Node node = getNode(index);
+	    Node<T> node = getNode(index);
 	    node.getPrev().setNext(node.getNext());
 	    node.getNext().setPrev(node.getPrev());
     }
@@ -136,11 +136,11 @@ public class MyLinkedList{
     return true;
   }
 
-  public Integer remove(int index){//exceptions!
+  public T remove(int index){//exceptions!
     if(index >= length || index < 0){
       throw new IndexOutOfBoundsException();      
     }
-    Node node;
+    Node<T> node;
     if(index != 0 && index != length -1){
 	    node = getNode(index);
 	    node.getPrev().setNext(node.getNext());
@@ -167,4 +167,12 @@ public class MyLinkedList{
     length = 0;
   }
 
+
+    public static void main(String[] args){
+	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
+	a.add(Integer.valueOf(0));
+	a.add(Integer.valueOf(1));
+	a.add(Integer.valueOf(2));
+	System.out.println(a);
+    }
 }

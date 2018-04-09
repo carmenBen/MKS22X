@@ -1,9 +1,9 @@
-public class Node<T>{
+public class NodeOld{
     private Node next = null;
     private Node prev = null;
-    private T data;
+    private Integer data;
 
-    public Node(T val, Node nextNode, Node prevNode){
+    public Node(Integer val, Node nextNode, Node prevNode){
 	next = nextNode;
 	prev = prevNode;
 	data = val;
@@ -18,7 +18,7 @@ public class Node<T>{
 	return prev;
     }
 
-    public T getValue(){
+    public Integer getValue(){
 	return data;
     }
 
@@ -30,7 +30,7 @@ public class Node<T>{
 	prev = n;;
     }
 
-    public void setValue(T d){
+    public void setValue(int d){
 	data = d;
     }
 
