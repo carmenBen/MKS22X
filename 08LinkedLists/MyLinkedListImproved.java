@@ -1,47 +1,77 @@
-public class MyLinkedListImproved<T>{
+import java.util.*;
+
+public class MyLinkedListImproved<T> implements Iterable<T>{
   Node first;
   Node last;
   int length;
 
-private class Node{
+  private class MyLinkedListIterator implements Iterator<T>{
+    MyLinkedListImproved list;
+    int n;
+
+    public MyLinkedListIterator(MyLinkedListImproved info){
+      list = info;
+    }
+
+    public void remove(){
+      throw new UnsupportedOperationException();
+    }
+
+    public T next(){
+      if(hasNext()){
+        n++;
+        return list.get(n-1);
+      }
+      else{
+        throw new NoSuchElementException();
+      }
+    }
+
+    public boolean hasNext(){
+      return list.size() > n;
+    }
+  }
+
+  
+  private class Node{
     private Node next = null;
     private Node prev = null;
     private T data;
 
     public Node(T val, Node nextNode, Node prevNode){
-        next = nextNode;
-        prev = prevNode;
-        data = val;
-      }
+      next = nextNode;
+      prev = prevNode;
+      data = val;
+    }
 
     
-      public Node getNext(){
-        return next;
-      }
+    public Node getNext(){
+      return next;
+    }
 
-      public Node getPrev(){
-        return prev;
-      }
+    public Node getPrev(){
+      return prev;
+    }
 
-      public T getValue(){
-        return data;
-      }
+    public T getValue(){
+      return data;
+    }
 
-      public void setNext(Node n){
-        next = n;
-      }
+    public void setNext(Node n){
+      next = n;
+    }
 
-      public void setPrev(Node n){
-        prev = n;;
-      }
+    public void setPrev(Node n){
+      prev = n;;
+    }
 
-      public void setValue(T d){
-        data = d;
-      }
+    public void setValue(T d){
+      data = d;
+    }
 
-      public String toString(){
-        return "" + data;
-      }
+    public String toString(){
+      return "" + data;
+    }
   }
   
   public MyLinkedListImproved(){
@@ -50,6 +80,10 @@ private class Node{
     last = null;
   }
 
+  public Iterator<T> iterator(){
+    return new MyLinkedListIterator(this);
+  }
+  
   public boolean add(T value){
     Node val = new Node(value,null,null);
     if(length != 0){
@@ -121,7 +155,7 @@ private class Node{
     int count = 0;
     while(node != null){
 	    if(node.getValue().equals(value)){
-		return count;
+        return count;
 	    }
 	    count++;
 	    node = node.getNext();
@@ -129,31 +163,31 @@ private class Node{
     return -1;
   }
 
-    public void add(int index, T value){//exceptions!
-	if(index > length || index < 0){
+  public void add(int index, T value){//exceptions!
+    if(index > length || index < 0){
 	    throw new IndexOutOfBoundsException();      
-	}
-        if(length == 0){
+    }
+    if(length == 0){
 	    Node node = new Node(value,null,null);
 	    first = node;
 	    last = node;
-	}
-	else if(index != 0 && index != length){
+    }
+    else if(index != 0 && index != length){
 	    Node current = getNode(index);
 	    Node node = new Node(value,current,current.getPrev());
 	    current.getPrev().setNext(node);
 	    current.setPrev(node);
-	}
-	else if(index == length){
+    }
+    else if(index == length){
 	    Node node = new Node(value,null,last);
 	    last.setNext(node);
 	    last = node;
-	}
-	else{
+    }
+    else{
 	    Node node = new Node(value,first,null);
 	    first.setPrev(node);
 	    first = node;
-	}
+    }
     length++;
   }
  	
@@ -193,7 +227,7 @@ private class Node{
 	    last = last.getPrev();
     }
     else{
-	node = getNode(index);
+      node = getNode(index);
 	    first.getNext().setPrev(null);
 	    first =first.getNext();
     }
@@ -209,11 +243,11 @@ private class Node{
   }
 
 
-    public static void main(String[] args){
-	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
-	a.add(Integer.valueOf(0));
-	a.add(Integer.valueOf(1));
-	a.add(Integer.valueOf(2));
-	System.out.println(a);
-    }
+  public static void main(String[] args){
+    MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
+    a.add(Integer.valueOf(0));
+    a.add(Integer.valueOf(1));
+    a.add(Integer.valueOf(2));
+    System.out.println(a);
+  }
 }
