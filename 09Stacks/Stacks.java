@@ -1,28 +1,24 @@
 import java.util.*;
 
-public class Stacks<T>{
-    private ArrayList<T> data;
+public class Stacks{
+    private ArrayList<String> data;
 
     public Stacks(){
-      data = new ArrayList<T>();
+      data = new ArrayList<String>();
     }
 
-  public void pop(){
+  public double pop(){
     if(data.size() != 0){
-      data.remove(data.size() - 1);
+      return Double.parseDouble(data.remove(data.size() - 1));
     }
+    return 0.0;
   }
 
-  public void push(T n){
+  public void push(String n){
     data.add(n);
+    //System.out.println(n);
   }
 
-  public T peak(){
-    if(data.size() != 0){
-      return data.get(data.size() - 1);
-    }
-    return  null;
-  }
 
   /*  public static void main(String[] args){
     Stacks<String> test = new Stacks<String>();
