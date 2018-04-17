@@ -1,7 +1,7 @@
 import java.util.*;
 public class Sorts{
 
-    public static void radixSort(MyLinkedListImproved<Integer> data){
+    public static void radixsort(MyLinkedListImproved<Integer> data){
         String max = "" +  data.get(data.max());
 	int maxi = max.length();
 	ArrayList<MyLinkedListImproved<Integer>> buckets = new ArrayList<MyLinkedListImproved<Integer>>();
@@ -24,7 +24,10 @@ public class Sorts{
 	}
     }
 
-    public static void main(String[] args){
+    public static void radixsortIncludingNegatives(MyLinkedListImproved<Integer> data){
+}
+
+    /*    public static void main(String[] args){
 	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
 	a.add(Integer.valueOf(1));
 	a.add(Integer.valueOf(533));
@@ -37,6 +40,6 @@ public class Sorts{
 	a.add(Integer.valueOf(999));
         radixSort(a);
         System.out.println(a);
-    }
+	}*/
 
 }
