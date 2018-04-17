@@ -305,7 +305,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     return minIndex;
   }
     
-
+    /*
   public static void main(String[] args){
     MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
     a.add(Integer.valueOf(0));
@@ -324,5 +324,5 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     a.extend(b);
     System.out.println(a);
     System.out.println(b);
-  }
+    }*/
 }
