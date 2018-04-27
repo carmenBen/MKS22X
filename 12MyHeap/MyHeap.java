@@ -1,15 +1,17 @@
 import java.util.*;
 
-public class MyHeap{
-    private String[] data;
+public class MyHeap<T extends Comparable<T>>{
+    private T[] data;
     private int size;
     private int max = 1;
 
+    @SuppressWarnings("unchecked")
     public MyHeap(){
 	size = 0;
-	data = new String[10];
+	data = (T[]) new Object[10];
     }
 
+    @SuppressWarnings("unchecked")
     public MyHeap(boolean type){
 	size = 0;
 	if(type){
@@ -18,22 +20,22 @@ public class MyHeap{
 	else{
 	    max = -1;
 	}
-	data = new String[10];
+	data = (T[]) new Object[10];
     }
 
     public int size(){
 	return size;
     }
 
-    public String peak(){
+    public T peak(){
 	if(size >0){
 	    return data[0];
 	}
-	return "";
+	return null;
     }
 
-    public String remove(){
-	String temp = data[0];
+    public T remove(){
+        T temp = data[0];
 	data[0] = data[size -  1];
 	data[size - 1] = null;
 	size--;
@@ -62,7 +64,7 @@ public class MyHeap{
     }
 
 
-    public void add(String s){
+    public void add(T s){
 	if(data.length == size){
 	    resize();
 	}
@@ -80,20 +82,21 @@ public class MyHeap{
     }
 
     public void swap(int a, int b){
-	String temp = data[a];
+	T temp = data[a];
 	data[a] = data[b];
 	data[b] = temp;
     }
 
+    @SuppressWarnings("unchecked")
     public void resize(){
-	String[] newData =  new String[size*2];
+	T[] newData =  (T[]) new Object[size*2];
 	for(int i = 0;i < size;i++){
 	    newData[i] = data[i];
 	}
 	data = newData;
     }
 
-    public boolean compare(String b, String a){
+    public boolean compare(T b, T a){
 	//    System.out.println(b+ " " + a+ " " + max);
 	if((b.compareTo(a)*max)  < 0){
 	    //  System.out.println("1");
@@ -104,7 +107,7 @@ public class MyHeap{
     }
 
     public static void main(String[] args){
-	MyHeap test = new MyHeap(false);
+	MyHeap<String> test = new MyHeap<String>(false);
 	test.add("z");
 	test.add("a");
 	test.add("c");
