@@ -5,6 +5,17 @@ public class MyHeap<T extends Comparable<T>>{
   private int size;
   private int max = 1;
 
+  public void heapify(T[] info){
+    data = info;
+    size = data.length;
+    for(int i = size - 1;i>= 0;i--){
+      int child = ((i*2)+1);
+      if(child <size){
+        pushDown(i,child);
+      }
+    }
+  }
+
   @SuppressWarnings("unchecked")
   public MyHeap(){
     size = 0;
@@ -110,8 +121,9 @@ public class MyHeap<T extends Comparable<T>>{
     return false;
   }
 
-  public static void main(String[] args){
-    MyHeap<Integer> test = new MyHeap<Integer>(true);
+
+  /*public static void main(String[] args){
+    MyHeap<Integer> test = new MyHeap<Integer>(false);
     test.add(6);
     test.add(1);
     test.add(3);
@@ -129,6 +141,6 @@ public class MyHeap<T extends Comparable<T>>{
     System.out.println(test.peak());
     test.remove();
     System.out.println(test.peak());
-  }
+    }*/
 
 }

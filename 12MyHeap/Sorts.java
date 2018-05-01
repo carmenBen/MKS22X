@@ -1,13 +1,11 @@
 import java.util.*;
 
 public class Sorts{
-  public static void heapSort(Object[] data){
-    for(int i = data.length - 1;i>= 0;i--){
-      int child = ((i*2)+1);
-      (MyHeap<Object>)  data;
-      if(child < data.length){
-        data.pushDown(i,child);
-      }
+  public static <T extends Comparable<T>> void heapSort(T[] data){
+    MyHeap<T> info = new MyHeap<T>();
+    info.heapify(data);
+    for(int i = data.length - 1;i >= 0;i--){
+      data[i] = info.remove();
     }
   }
 
