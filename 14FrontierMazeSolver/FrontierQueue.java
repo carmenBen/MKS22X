@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class FrontierQueue{
+    private Queue<Location> locations;
+
+    public FrontierQueue(){
+	locations = new LinkedList<Location>();
+    }
+
+    public Location next(){
+	return locations.remove();
+    }
+
+    public void add(Location n){
+	locations.add(n);
+    }
+
+    public boolean hasNext(){
+	return !locations.peek().equals(null);
+    }
+
+}
