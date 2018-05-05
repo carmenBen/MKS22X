@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class FrontierStack{
+public class FrontierStack implements Frontier{
     private Stack<Location> locations;
 
     public FrontierStack(){

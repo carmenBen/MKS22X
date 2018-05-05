@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class FrontierQueue{
+public class FrontierQueue implements Frontier{
     private Queue<Location> locations;
 
     public FrontierQueue(){
