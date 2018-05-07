@@ -1,9 +1,14 @@
 public class MazeSolver{
   private Maze maze;
   private Frontier frontier;
+    private boolean animate;
+
+    public void animate(boolean n){
+	animate = n;
+    }
 
   public MazeSolver(String mazeText){
-    Maze maze = new Maze(mazeText);
+    maze = new Maze(mazeText);
   }
 
   //Default to BFS
@@ -20,7 +25,7 @@ public class MazeSolver{
     else{
       frontier = new FrontierStack(); 
     }
-	       
+    frontier.add(maze.getStart());
     //while there is stuff in the frontier:
     //  get the next location
     //  process the location to find the locations (use the maze to do this)
@@ -29,12 +34,16 @@ public class MazeSolver{
     //when there are no more values in the frontier return false
     while(frontier.hasNext()){
       Location node = frontier.next();
+      maze.setSpot(node,'.');
       Location[] neighbors = maze.getNeighbors(node);
       for(int i = 0;i < neighbors.length;i++){
         if(neighbors[i] ==maze.getEnd()){
           return true;
         }
         frontier.add(neighbors[i]);
+      }
+      if(animate){
+	  System.out.println(this);
       }
     }
     return false;
