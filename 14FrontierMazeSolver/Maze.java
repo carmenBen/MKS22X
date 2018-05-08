@@ -1,6 +1,8 @@
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.lang.*;
+
 public class Maze{
   private static final String CLEAR_SCREEN =  "\033[2J";
   private static final String HIDE_CURSOR =  "\033[?25l";
@@ -32,12 +34,14 @@ public class Maze{
       if(x+possibleMoves[i]>=0 &&x+possibleMoves[i] <maze.length&&y+possibleMoves[i+1]>=0 && y+possibleMoves[i+1]<maze[0].length){
         if(maze[x+possibleMoves[i]][y+possibleMoves[i+1]] == 'E' ){
           end = new Location(end.getX(),end.getY(),L);
+	  end.setDistance(0);
           result[count] = end;
           setSpot(result[count],'?');
           count++;
         }
         else if(maze[x+possibleMoves[i]][y+possibleMoves[i+1]] == ' ' ){
           result[count] = new Location(x+possibleMoves[i],y+possibleMoves[i+1],L);
+	  result[count].setDistance(Math.abs(end.getX() - result[count].getX()) + Math.abs( end.getY() - result[count].getY()));
           setSpot(result[count],'?');
           count++;
         }
@@ -125,11 +129,13 @@ public class Maze{
       other kinds of frontiers!
     */
     end = new Location(endr,endc,null);
+    end.setDistance(0);
     start = new Location(startr,startc,null);
+    start.setDistance(Math.abs(endr-startr) + Math.abs(endc-startc));
   }
 
   public String toStringColor(){
-    return toStringColor(50);
+    return toStringColor(10000);
   }
 
   public String toStringColor(int delay){

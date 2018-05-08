@@ -17,13 +17,17 @@ public class MazeSolver{
   //mode: required to allow for alternate solve modes.
   //0: BFS
   //1: DFS
+    //2: PriorityQueue
   public boolean solve(int mode){
     //initialize your frontier
     if(mode == 0){
 	    frontier = new FrontierQueue();
     }
-    else{
+    else if(mode ==1){
       frontier = new FrontierStack(); 
+    }
+    else if(mode ==2){
+	frontier = new FrontierPriorityQueue();
     }
     frontier.add(maze.getStart());
     maze.setSpot(maze.getStart(),'@');
