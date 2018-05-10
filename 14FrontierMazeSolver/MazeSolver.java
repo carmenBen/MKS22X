@@ -63,6 +63,6 @@ public class MazeSolver{
   }
 
   public String toString(){
-    return maze.toString();
+    return maze.toStringColor();
   }
 }

@@ -9,11 +9,16 @@ public class Maze{
   private static final String SHOW_CURSOR =  "\033[?25h";
   Location start,end;
   private char[][]maze;
+    private boolean regular;
 
   public void setSpot(Location L, char c){
     //System.out.println("" + L.getX() + " " + L.getY() + " " + c);
     maze[L.getX()][L.getY()] = c;
   }
+
+    public void type(boolean n){
+	regular = n;
+    }
 
   /*
     YOU MUST COMPLETE THIS METHOD!!!
@@ -29,7 +34,7 @@ public class Maze{
                                     0,-1};
 
     int x = L.getX();
-    int y = L.getY();
+-    int y = L.getY();
     for(int i = 0;i+1 < possibleMoves.length;i=i+2){
       if(x+possibleMoves[i]>=0 &&x+possibleMoves[i] <maze.length&&y+possibleMoves[i+1]>=0 && y+possibleMoves[i+1]<maze[0].length){
         if(maze[x+possibleMoves[i]][y+possibleMoves[i+1]] == 'E' ){
@@ -40,9 +45,9 @@ public class Maze{
           count++;
         }
         else if(maze[x+possibleMoves[i]][y+possibleMoves[i+1]] == ' ' ){
-          result[count] = new Location(x+possibleMoves[i],y+possibleMoves[i+1],L);
-	  result[count].setDistance(Math.abs(end.getX() - result[count].getX()) + Math.abs( end.getY() - result[count].getY()));
-          setSpot(result[count],'?');
+	    result[count] = new Location(x+possibleMoves[i],y+possibleMoves[i+1],L);
+	    result[count].setDistance(Math.abs(end.getX() - result[count].getX()) + Math.abs( end.getY() - result[count].getY()));
+	    setSpot(result[count],'?');
           count++;
         }
       }
@@ -135,7 +140,7 @@ public class Maze{
   }
 
   public String toStringColor(){
-    return toStringColor(10000);
+    return toStringColor(1000);
   }
 
   public String toStringColor(int delay){
