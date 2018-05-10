@@ -1,7 +1,7 @@
 public class Location implements Comparable<Location>{
     private int x,y;
     private Location previous;
-    private int distanceToEnd;
+    private int distanceToEnd,oldDistance;
 
     public Location(int _x, int _y, Location prev){
 	x = _x;
@@ -15,6 +15,14 @@ public class Location implements Comparable<Location>{
     
     public int getDistance(){
 	return distanceToEnd;
+    }
+
+    public void setOldDistance(int d){
+	oldDistance = d;
+    }
+    
+    public int getOldDistance(){
+	return oldDistance;
     }
 
     public int getX(){

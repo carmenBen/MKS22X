@@ -3,6 +3,10 @@ public class MazeSolver{
   private Frontier frontier;
     private boolean animate;
 
+    public void setType(boolean n){
+	maze.type(n);
+    }
+
     public void animate(boolean n){
 	animate = n;
     }
