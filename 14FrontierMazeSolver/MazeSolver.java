@@ -3,8 +3,8 @@ public class MazeSolver{
   private Frontier frontier;
     private boolean animate;
 
-    public void setType(boolean n){
-	maze.type(n);
+    public void setAStar(boolean n){
+	maze.type(!n);
     }
 
     public void animate(boolean n){
@@ -22,7 +22,14 @@ public class MazeSolver{
   //0: BFS
   //1: DFS
     //2: PriorityQueue
+    //3: A*
   public boolean solve(int mode){
+      if(mode == 3){
+	  setAStar(true);
+      }
+      else{
+	  setAStar(false);
+      }
     //initialize your frontier
     if(mode == 0){
 	    frontier = new FrontierQueue();
@@ -30,7 +37,7 @@ public class MazeSolver{
     else if(mode ==1){
       frontier = new FrontierStack(); 
     }
-    else if(mode ==2){
+    else if(mode ==2 || mode == 3){
 	frontier = new FrontierPriorityQueue();
     }
     frontier.add(maze.getStart());
